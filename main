@@ -1,0 +1,155 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduceti dimensiunea maxima a listei de participanti:");
+		int l = sc.nextInt();
+		GuestsList gl = new GuestsList(l);
+		int n = 1;
+		System.out.println("Introduceti una dintre urmatoarele comenzi:");
+		gl.help();
+		while(n != 0) {
+			String s;
+			String s1;
+			s = sc.next();
+			if (s.equals("help"))
+				gl.help();
+			if (s.equals("quit")) {
+				n = 0; gl.quit();
+			}
+			if (s.equals("guests")) {
+				ArrayList<Guest> listaParticipanti = new ArrayList<Guest>();
+				listaParticipanti = gl.guests();
+				for (int i = 0; i < listaParticipanti.size(); i++)
+				System.out.println(listaParticipanti.get(i).getEmail());
+			}
+			if (s.equals("waitlist")) {
+				ArrayList<Guest> listaParticipanti = new ArrayList<Guest>();
+				listaParticipanti = gl.waitlist();
+				for (int i = 0; i < listaParticipanti.size(); i++)
+				System.out.println(listaParticipanti.get(i).getEmail());
+			}
+				
+			if (s.equals("available"))
+				System.out.println(gl.available());
+			if (s.equals("guests_no"))
+				System.out.println(gl.guests_no());
+			if (s.equals("waitlist_no"))
+				System.out.println(gl.waitlist_no());
+			if (s.equals("subscribe_no"))
+				System.out.println(gl.subscribe_no());
+			if (s.equals("add")) {
+				Guest g = new Guest();
+				System.out.println("Introduceti nume familie:");
+				s1 = sc.next();
+				g.setLastName(s1);
+				System.out.println("Introduceti prenume:");
+				s1 = sc.next();
+				g.setFirstName(s1);
+				System.out.println("Introduceti email:");
+				s1 = sc.next();
+				g.setEmail(s1);
+				System.out.println("Introduceti phoneNumber:");
+				s1 = sc.next();
+				g.setPhoneNumber(s1);
+				gl.add(g.getLastName(), g.getFirstName(), g.getEmail(), g.getPhoneNumber());
+			}
+			if (s.contentEquals("check")) {
+				System.out.println("Introduceti varianta(numarul 1, 2 sau 3):");
+				System.out.println("1. lastName si firstName");
+				System.out.println("2. email");			
+				System.out.println("3. phoneNumber");
+				l = sc.nextInt();
+				Guest g = new Guest();
+				if (l == 1) {
+					System.out.println("Introduceti nume familie:");
+					s1 = sc.next();
+					g.setLastName(s1);
+					System.out.println("Introduceti nume:");
+					s1 = sc.next();
+					g.setFirstName(s1);
+				}
+				if (l == 2) {
+					System.out.println("Introduceti email:");
+					s1 = sc.next();
+					g.setEmail(s1);
+				}
+				if (l == 3) {
+					System.out.println("Introduceti phoneNumber:");
+					s1 = sc.next();
+					g.setPhoneNumber(s1);
+				}
+				gl.check(g, l);
+			}
+			if (s.equals("remove")) {
+				System.out.println("Introduceti varianta(numarul 1, 2 sau 3):");
+				System.out.println("1. lastName si firstName");
+				System.out.println("2. email");			
+				System.out.println("3. phoneNumber");
+				l = sc.nextInt();
+				Guest g = new Guest();
+				if (l == 1) {
+					System.out.println("Introduceti nume familie:");
+					s1 = sc.next();
+					g.setLastName(s1);
+					System.out.println("Introduceti nume:");
+					s1 = sc.next();
+					g.setFirstName(s1);
+				}
+				if (l == 2) {
+					System.out.println("Introduceti email:");
+					s1 = sc.next();
+					g.setEmail(s1);
+				}
+				if (l == 3) {
+					System.out.println("Introduceti phoneNumber:");
+					s1 = sc.next();
+					g.setPhoneNumber(s1);
+				}
+				gl.remove(g);
+			}
+			if(s.equals("update")) {
+				System.out.println("Introduceti varianta(numarul 1, 2 sau 3):");
+				System.out.println("1. lastName si firstName");
+				System.out.println("2. email");			
+				System.out.println("3. phoneNumber");
+				l = sc.nextInt();
+				Guest g = new Guest();
+				if (l == 1) {
+					System.out.println("Introduceti nume familie:");
+					s1 = sc.next();
+					g.setLastName(s1);
+					System.out.println("Introduceti nume:");
+					s1 = sc.next();
+					g.setFirstName(s1);
+				}
+				if (l == 2) {
+					System.out.println("Introduceti email:");
+					s1 = sc.next();
+					g.setEmail(s1);
+				}
+				if (l == 3) {
+					System.out.println("Introduceti phoneNumber:");
+					s1 = sc.next();
+					g.setPhoneNumber(s1);
+				}
+				gl.update(g, l);
+			}
+			
+			if(s.equals("search")) {
+				ArrayList<Guest> ar = new ArrayList<Guest>();
+				System.out.println("Introduceti stringul");
+				s1 = sc.next();
+				ar = gl.search(s1);
+				for(int i = 0; i < ar.size(); i++)
+					System.out.print(ar.get(i).getEmail());
+			}
+				
+		}
+		sc.close();
+	}
+
+}
